@@ -6,7 +6,6 @@
 
 ## 功能
 
-- **自动连接电视**：脚本会尝试通过 ADB 连接到指定的电视 IP 地址和端口。
 - **屏幕状态检测**：脚本会定期检测电视屏幕的状态（开启或关闭）。
 - **自动关机**：如果屏幕关闭超过 1 小时，脚本会发送关机命令关闭电视。
 - **重连机制**：如果连接中断，脚本会自动重连电视。
@@ -52,11 +51,14 @@ auto_shutdown.sh
    ```
 3. 运行 Docker 容器
 运行以下命令启动容器：
-  ```bash
-    docker run -d --name tv-auto-shutdown sony-tv-auto-shutdown --network host
-  ```
+     ```bash
+       docker run -d --name sony-tv-auto-shutdown sony-tv-auto-shutdown --network host
+     ```
 4. 查看日志
 查看容器日志：
-  ```bash
-    docker logs -f tv-auto-shutdown
-  ```
+     ```bash
+       docker logs -f sony-tv-auto-shutdown
+     ```
+
+### 电视端
+   脚本执行后电视端回弹出是否允许adb调试的提示，点击允许
