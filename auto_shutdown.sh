@@ -23,19 +23,19 @@ connect_tv() {
 # 检测屏幕状态（增加连接状态检测）
 isScreenOn() {
     # 第一次尝试获取状态
-    screen_info=$(adb shell dumpsys input_method 2>/dev/null | grep mInteractive=true)
+    screen_info=$(adb shell dumpsys input_method 2>/dev/null)
     adb_exit_code=$?
     if [[ $adb_exit_code -ne 0 ]]; then
         # ADB命令失败时尝试重连
         connect_tv || return 2
         # 重连成功后再次尝试获取状态
-        screen_info=$(adb shell dumpsys input_method 2>/dev/null | grep mInteractive=true)
+        screen_info=$(adb shell dumpsys input_method 2>/dev/null)
         adb_exit_code=$?
         [[ $adb_exit_code -ne 0 ]] && return 2
     fi
 
     # 解析屏幕状态
-    if [[ $screen_info == *"mInteractive"* ]]; then
+    if [[ $screen_info == *"mInteractive=true"* ]]; then
         echo "Screen is ON"
         return 0
     else
